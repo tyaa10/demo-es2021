@@ -69,20 +69,80 @@ process.stdout.write('\n') */
 
 /* Functions */
 
-f1()
+// f1()
 // f2()
 
 // definition
-function f1 () {
+/* function f1 () {
   console.log('Hello 1')
 }
 
 const f2 = function () {
   console.log('Hello 2')
-}
+} */
 
 // f1()
-f2()
+// f2()
 
 // console.log(f1())
 // console.log(f2())
+
+/* const f1 = function () {
+  console.log('Hello 1')
+  console.log(this)
+}
+
+const f2 = () => {
+  console.log('Hello 2')
+  console.log(this)
+}
+
+f1()
+f2()
+
+console.log(this.x) */
+
+const person = {
+  name: 'John',
+  age: 20 /* ,
+  print: function () {
+    console.log(`Person {name: ${this.name}, age: ${this.age}}`)
+  } */
+  ,
+  print: () => {
+    console.log(`Person {name: ${this.name}, age: ${this.age}}`)
+  }
+}
+
+// person.print()
+
+/* function universal() {
+  for (let idx = 0; idx < arguments.length; idx++) {
+    console.log(`Argument {index: ${idx}, arg: ${arguments[idx]}}`)
+  }
+}
+
+universal('Hello', 'JS') */
+// rest operator
+function universal(a, b, ...args) {
+  // console.log(args)
+  /* for (let idx = 0; idx < args.length; idx++) {
+    console.log(`Argument {index: ${idx}, arg: ${args[idx]}}`)
+  } */
+  console.log(a, b)
+  args.forEach((arg, idx) => {
+    console.log(`Argument {index: ${idx}, arg: ${arg}}`)
+  })
+  return [a, b]
+}
+
+// const result = universal('Hello', 'JS', '!')
+const result = universal(2, 3, 4)
+console.log('***')
+function ext(x, y) {
+  return Math.pow(x, y)
+}
+console.log(result)
+console.log('***')
+// spread
+console.log(ext(...result))
