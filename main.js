@@ -133,11 +133,11 @@ function universal(a, b, ...args) {
   args.forEach((arg, idx) => {
     console.log(`Argument {index: ${idx}, arg: ${arg}}`)
   })
-  return [a, b]
+  return [a, b, ...args] // spread
 }
 
 // const result = universal('Hello', 'JS', '!')
-const result = universal(2, 3, 4)
+/* const result = universal(2, 3, 4)
 console.log('***')
 function ext(x, y) {
   return Math.pow(x, y)
@@ -146,3 +146,63 @@ console.log(result)
 console.log('***')
 // spread
 console.log(ext(...result))
+// destructuring
+const [x, y, z] = universal(2, 3, 4) // Array === [2, 3]
+console.log(x, y, z) // Standalone Variables */
+
+// Closures
+
+const parent = () => {
+  // parent context
+  const state = {
+    count: 0
+  }
+  // child
+  return () => {
+    return ++state.count
+  }
+}
+
+/* const child = parent()
+for (let i = 0; i < 5; i++) {
+  console.log(child())
+} */
+
+// Arrays, Iterators
+
+// const numbers = [-1, 10, 3, 40, 52, 7, 0, 9, 0]
+/* numbers.sort((a, b) => b - a)
+  .filter(n => n > 0)
+  .map(n => n * n) // mapping
+  .forEach(n => console.log(n)) */
+
+  /* const sum = numbers.sort((a, b) => b - a)
+                .filter(n => n > 0)
+                .map(n => n * n)
+                .reduce((result, current) => result += current)
+  console.log((sum / numbers.length).toFixed(2)) */
+
+  const people = [
+    {
+      name: 'John',
+      age: 30
+    },
+    {
+      name: 'Bill',
+      age: 32
+    },
+    {
+      name: 'Mary',
+      age: 20
+    }
+  ]
+
+  const sum = people.filter(p => p.age <= 30)
+                // .map(p => p.age)
+                .reduce((result, current) => result += current.age, 0)
+  console.log((sum / people.filter(p => p.age <= 30).length).toFixed(2))
+
+  // Создать массив объектов товаров: название, цена за единицу, количество единиц в наличии
+  // При помощи map получить массив объектов, у которых будет название и полная стоимость,
+  // равная произведению цены единицы на количество
+  // Отфильтровать только те, у которых полная стоимость входит в диапазон, например, от 10 до 200
