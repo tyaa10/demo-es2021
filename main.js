@@ -200,9 +200,106 @@ for (let i = 0; i < 5; i++) {
   const sum = people.filter(p => p.age <= 30)
                 // .map(p => p.age)
                 .reduce((result, current) => result += current.age, 0)
-  console.log((sum / people.filter(p => p.age <= 30).length).toFixed(2))
+  // console.log((sum / people.filter(p => p.age <= 30).length).toFixed(2))
 
   // Создать массив объектов товаров: название, цена за единицу, количество единиц в наличии
   // При помощи map получить массив объектов, у которых будет название и полная стоимость,
   // равная произведению цены единицы на количество
   // Отфильтровать только те, у которых полная стоимость входит в диапазон, например, от 10 до 200
+
+  const items = [
+    {
+    name: "firstname",
+    price: 15,
+    quantity: 4      
+  },
+   {
+    name: "secondname",
+    price: 35,
+    quantity: 1     
+  },
+    {
+    name: "thirdname",
+    price: 1,
+    quantity: 10     
+  },
+     {
+    name: "fourthname",
+    price: 7,
+    quantity: 2      
+  },
+      {
+    name: "fifthname",
+    price: 25,
+    quantity: 3     
+    }
+    
+]
+  
+const multiply = items.map(item => ({
+  name: item.name,
+  totalPrice: item.price * item.quantity
+})).filter(item => (item.totalPrice >= 10 && item.totalPrice <= 200 ))
+  .sort((item1, item2) => item1.name.localeCompare(item2.name))
+
+
+// console.log(multiply)
+
+function mySort (compare) {
+  // list = JSON.parse(JSON.stringify(this))
+  list = this.map(item => item)
+  let isSorted
+  do {
+    isSorted = true
+    for (let i = 0; i < list.length - 1; i++) {
+      const currentItem = list[i]
+      const nextItem = list[i + 1]
+      if (compare(currentItem, nextItem) < 0) {
+        list[i] = nextItem
+        list[i + 1] = currentItem
+        isSorted = false
+      }
+    }
+  } while (!isSorted)
+  return list
+}
+
+Array.prototype.mySort = mySort
+
+// TDD
+
+const items2 = items.mySort((a, b) => a.quantity - b.quantity)
+
+for (let i = 0; i < items2.length - 1; i++) {
+  const currentItem = items2[i]
+  const nextItem = items2[i + 1]
+  if (currentItem.quantity - nextItem.quantity < 0) {
+    throw new Error(`Element ${i} (${currentItem}) less than element ${i + 1} (${nextItem})`)
+  }
+}
+
+const items3 = items.mySort((a, b) => b.name.localeCompare(a.name))
+
+for (let i = 0; i < items3.length - 1; i++) {
+  const currentItem = items3[i]
+  const nextItem = items3[i + 1]
+  if (nextItem.name.localeCompare(currentItem.name) < 0) {
+    throw new Error(`Element ${i} (${currentItem}) less than element ${i + 1} (${nextItem})`)
+  }
+}
+
+console.log('Success')
+
+/* function hello () {
+  console.log('Hello Prototype!')
+}
+
+function printFirst () {
+  console.log(this)
+}
+
+Array.prototype.hello = hello
+Array.prototype.printFirst = printFirst
+
+items.hello()
+items.printFirst() */

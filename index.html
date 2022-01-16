@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validation Demo</title>
+</head>
+<body>
+  <form action="/" method="post">
+    <span id="loginError" style="color: red;display: none;">Login validation error</span>
+    <br>
+    <label for="login">
+      Login: <input novalidate type="text" name="login" id="login" placeholder="More than or equals 3 and less than or equals 25 characters">
+    </label>
+    <br>
+    <span id="passwordError" style="color: red;display: none;">Password validation error</span>
+    <label for="password">
+      Password: <input novalidate type="password" name="password" id="password" placeholder="8-16 characters and/or numbers">
+    </label>
+    <br>
+    <input type="submit" value="Sign Up">
+  </form>
+  <script type="module" src="./entrypoint.mjs"></script>
+</body>
+</html>
